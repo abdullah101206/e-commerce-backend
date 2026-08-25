@@ -1,0 +1,16 @@
+# Environment variables (Sensitive Data)
+.env
+.env.local
+.env.production
+
+# Dependencies
+node_modules/
+
+# Logs & Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
