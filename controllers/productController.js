@@ -2,7 +2,7 @@ const Product = require("../models/Product");
 
 const getProducts = async (req, res) => {
   try {
-    const { category, search, featured } = req.query;
+    const { category, search, featured, isNewArrival } = req.query;
     let query = {};
 
     if (category) {
@@ -11,6 +11,10 @@ const getProducts = async (req, res) => {
 
     if (featured) {
       query.isFeatured = featured === "true";
+    }
+
+    if (isNewArrival) {
+      query.isNewArrival = isNewArrival === "true";
     }
 
     if (search) {
@@ -50,6 +54,7 @@ const createProduct = async (req, res) => {
       images,
       stockCount,
       isFeatured,
+      isNewArrival,
     } = req.body;
 
     const product = new Product({
@@ -62,6 +67,7 @@ const createProduct = async (req, res) => {
       images: images || [],
       stockCount: stockCount || 10,
       isFeatured: isFeatured || false,
+      isNewArrival: isNewArrival || false,
     });
 
     const createdProduct = await product.save();
@@ -87,6 +93,8 @@ const updateProduct = async (req, res) => {
         req.body.stockCount !== undefined ? req.body.stockCount : product.stockCount;
       product.isFeatured =
         req.body.isFeatured !== undefined ? req.body.isFeatured : product.isFeatured;
+      product.isNewArrival =
+        req.body.isNewArrival !== undefined ? req.body.isNewArrival : product.isNewArrival;
 
       const updatedProduct = await product.save();
       res.status(200).json(updatedProduct);

@@ -1,4 +1,4 @@
-    const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
@@ -19,12 +19,11 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, "Product category is required"],
-      enum: ["Men", "Women", "Accessories"],
       trim: true,
     },
     subCategory: {
       type: String,
-      default: "", 
+      default: "",
     },
     image: {
       type: String,
@@ -32,7 +31,7 @@ const productSchema = new mongoose.Schema(
     },
     images: [
       {
-        type: String, 
+        type: String,
       },
     ],
     inStock: {
@@ -51,6 +50,10 @@ const productSchema = new mongoose.Schema(
       max: 5,
     },
     isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    isNewArrival: {
       type: Boolean,
       default: false,
     },
