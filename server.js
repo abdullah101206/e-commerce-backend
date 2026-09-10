@@ -3,9 +3,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 
-// Routes Import
 const authRoutes = require("./routes/authRoutes");
-const productRoutes = require("./routes/productRoutes"); // 1. Import check karein
+const productRoutes = require("./routes/productRoutes"); 
+const orderRoutes = require("./routes/orderRoutes");
 
 dotenv.config();
 connectDB();
@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes); 
+app.use("/api/orders", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 
