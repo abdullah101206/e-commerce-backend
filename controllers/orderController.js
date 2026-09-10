@@ -76,21 +76,24 @@ const getAllOrders = async (req, res) => {
   }
 };
 
-
 const updateOrderStatus = async (req, res) => {
   try {
-    const { orderStatus, isPaid } = req.body;
+    const { status, orderStatus, isPaid } = req.body;
     const order = await Order.findById(req.params.id);
 
     if (order) {
-      order.orderStatus = orderStatus || order.orderStatus;
+      // Handles both frontend formats
+      const newStatus = status || orderStatus;
+      if (newStatus) {
+        order.orderStatus = newStatus;
+      }
 
       if (isPaid !== undefined) {
         order.isPaid = isPaid;
         if (isPaid) order.paidAt = Date.now();
       }
 
-      if (orderStatus === "Delivered") {
+      if (newStatus === "Delivered") {
         order.deliveredAt = Date.now();
       }
 
